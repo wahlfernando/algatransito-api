@@ -1,5 +1,6 @@
 package com.algaworks.faw.algatransito.domain.service;
 
+import com.algaworks.faw.algatransito.domain.exception.NegocioException;
 import com.algaworks.faw.algatransito.domain.model.Proprietario;
 import com.algaworks.faw.algatransito.domain.repository.ProprrietarioRepository;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,15 @@ public class RegistroProprietarioService {
 
     @Transactional
     public Proprietario salvar(Proprietario proprietario) {
+        boolean emailEmUso = proprrietarioRepository
+            .findByEmail(proprietario.getEmail())
+            .filter(p -> !p.equals(proprietario))
+            .isPresent();
+
+        if (emailEmUso) {
+            throw new NegocioException("Email ja está em uso!");
+        }
+
         return proprrietarioRepository.save(proprietario);
     }
 
