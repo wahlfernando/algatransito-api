@@ -1,6 +1,5 @@
 package com.algaworks.faw.algatransito.api.controller;
 
-import com.algaworks.faw.algatransito.domain.exception.NegocioException;
 import com.algaworks.faw.algatransito.domain.model.Veiculo;
 import com.algaworks.faw.algatransito.domain.repository.VeiculoRepositorio;
 import com.algaworks.faw.algatransito.domain.service.RegistroVeiculoService;
@@ -37,11 +36,5 @@ public class VeiculoController {
     @ResponseStatus(HttpStatus.CREATED)
     public Veiculo cadastar(@Valid @RequestBody Veiculo veiculo) {
         return registroVeiculoService.cadastrar(veiculo);
-    }
-
-
-    @ExceptionHandler(NegocioException.class)
-    public ResponseEntity<String> capturar(NegocioException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
     }
 }
