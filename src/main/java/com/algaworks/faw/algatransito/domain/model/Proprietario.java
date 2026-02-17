@@ -3,6 +3,7 @@ package com.algaworks.faw.algatransito.domain.model;
 
 import com.algaworks.faw.algatransito.domain.validation.ValidationGroups;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -31,6 +32,7 @@ public class Proprietario {
 
     @Size(max = 255)
     @Column
+    @Email
     private String email;
 
     @Column(name = "fone")
